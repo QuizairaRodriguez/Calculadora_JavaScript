@@ -111,33 +111,26 @@ window.addEventListener("load", function(){
             let salida;
             let resultado;
             console.log(ultimo_caracter)
-            if(acumulador == "" && operacion == "" && resultado_anterior == ""){
+            if(acumulador == "" && operacion == "" && resultado_anterior == "" && this.value == "."){
+                borrarTodo();
+                abrirPopup();
+                salida = "";
+            } else if(acumulador == "" && operacion == "" && resultado_anterior == ""){
                 salida = display + this.value;
+            } else if(this.value == "." && (ultimo_caracter == "+" || ultimo_caracter == "-" || ultimo_caracter == "*" || ultimo_caracter == "/")){
+                borrarTodo();
+                abrirPopup();
+                salida = "";
             } else if(acumulador != "" && operacion != "" ){
                 salida = display + this.value;
             } else if(display == "-"){
                 imprimirOperacion("");
                 salida = display + this.value;
-            }
-
-
-
-            /*if(display == "" && resultado_anterior != ""){
-                imprimirResultado("");
-                salida = this.value;  
-            } else if(display == ""){
-                salida = this.value;
-            } else if((resultado_anterior == "") && (ultimo_caracter == "+" || ultimo_caracter == "-" || ultimo_caracter == "*" || ultimo_caracter == "/")){
-                salida = display + this.value;
-            } else if((resultado_anterior != "") && (ultimo_caracter == "+" || ultimo_caracter == "-" || ultimo_caracter == "*" || ultimo_caracter == "/")){
-                salida = display + this.value;
-                imprimirResultado("");
-            } /*else if(resultado_anterior == "" && ultimo_caracter == "√"){
-                salida = display + this.value;
-                resultado = raizCuadrada(this.value);
-                imprimirResultado(resultado);
-                imprimirAcumulador(resultado);
-            }*/
+            } else if(this.value == "." && resultado_anterior != ""  && display == ""){
+                borrarTodo();
+                abrirPopup();
+                salida = "";
+            } 
             imprimirHistorial(salida);
         }
     }
@@ -168,18 +161,26 @@ window.addEventListener("load", function(){
                 operador = operacion;
                 resultado = operar(x, y, operador);
                 console.log(resultado);
-                salida = resultado + this.value;
-                imprimirOperacion(this.value);
-                imprimirResultado(resultado);
-                imprimirAcumulador(resultado);
+                if(resultado == undefined){
+                    borrarTodo();
+                    abrirPopup();
+                    salida = "";
+                } else {
+                    salida = resultado + this.value;
+                    imprimirOperacion(this.value);
+                    imprimirResultado(resultado);
+                    imprimirAcumulador(resultado);
+                }
             } else if((resultado_anterior != "") && (acumulador == "") && (operacion == "") && (display == "")){
                 salida = resultado_anterior + this.value;
                 operador = this.value;
                 imprimirOperacion(operador);
                 imprimirAcumulador(resultado_anterior);
-            }/*else if(ultimo_caracter == "+" || ultimo_caracter == "-" || ultimo_caracter == "*" || ultimo_caracter == "/"){
-                salida = display + this.value;
-            } */
+            } else if (display == "+" || display == "-" || display == "*" || display == "/" && operacion != ""){
+                borrarTodo();
+                abrirPopup();
+                salida = "";
+            }
             imprimirHistorial(salida);
         }
     }
