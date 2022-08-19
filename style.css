@@ -225,12 +225,12 @@ input {
 }
 
 #acumulador {
-    color: /*transparent*/white;
+    color: transparent;
     height: 20px;
 }
 
 #operacion {
-    color: /*transparent*/white;
+    color: transparent;
     height: 20px;
 }
 

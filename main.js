@@ -160,7 +160,6 @@ window.addEventListener("load", function(){
                 x = acumulador;
                 operador = operacion;
                 resultado = operar(x, y, operador);
-                console.log(resultado);
                 if(resultado == undefined){
                     borrarTodo();
                     abrirPopup();
@@ -232,12 +231,12 @@ window.addEventListener("load", function(){
             y = display.slice(indice_para_cortar, display.length);
             operador = operacion;
             resultado = operar(x, y, operador);
-            salida = resultado;
+            console.log(resultado)
             if(resultado != ""){
                 imprimirOperacion("");
                 imprimirResultado(resultado);
                 imprimirAcumulador("");  
-            }  else {
+            } else {
                 borrarTodo();
                 abrirPopup();
             }    
